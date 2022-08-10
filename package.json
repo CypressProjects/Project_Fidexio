@@ -1,0 +1,23 @@
+{
+  "name": "project_fidexio",
+  "version": "1.0.0",
+  "description": "This project tests each menu option on the web home page",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CypressProjects/Project_Fidexio.git"
+  },
+  "author": "aDrk",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CypressProjects/Project_Fidexio/issues"
+  },
+  "homepage": "https://github.com/CypressProjects/Project_Fidexio#readme",
+  "devDependencies": {
+    "cypress": "^9.7.0",
+    "typescript": "^4.7.4"
+  }
+}
