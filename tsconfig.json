@@ -4,5 +4,5 @@
       "lib": ["es5", "dom"],
       "types": ["cypress", "node"]
     },
-    "include": ["**/*.ts","**/tests/fidexio.spec.ts"]
+    "include": ["**/*.ts","**/tests/fidexio.spec.ts", "cypress/integration/com/fidexio/tests/fidexio.spec.js"]
   }
