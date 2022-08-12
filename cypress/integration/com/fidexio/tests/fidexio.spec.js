@@ -12,7 +12,7 @@ describe('As a POSManager, I should be able to create and desgin a new survey fr
         login.loginFidexio();
         cy.get('.oe_topbar_name').contains('POSManager10').should('be.visible');
     })
-    it('As a POSManager, user verify all buttons before creating a Survey',()=>{
+    it.only('As a POSManager, user verify all buttons before creating a Survey',()=>{
         login.selectMenu("surveys");
         cy.url().should('include','survey')
         
@@ -25,7 +25,7 @@ describe('As a POSManager, I should be able to create and desgin a new survey fr
         survey.kanbanView();
     })
 
-    it.only('As a Posmanager, I should be able to create and to see my meetings and events on my calendar from "Calendar" module',()=>{
+    it('As a Posmanager, I should be able to create and to see my meetings and events on my calendar from "Calendar" module',async()=>{
         const calendar = new calendarPage();
         login.selectMenu('Calendar');
 
