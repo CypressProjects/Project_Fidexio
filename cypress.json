@@ -1,5 +1,6 @@
 {
   "defaultCommandTimeout": 10000,
   "projectId": "neeepp",
-  "reporter": "cypress-mochawesome-reporter"
+  "reporter": "cypress-mochawesome-reporter",
+  "chromeWebSecurity":false
 }
