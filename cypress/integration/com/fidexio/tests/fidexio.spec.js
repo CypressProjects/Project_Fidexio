@@ -6,19 +6,18 @@ import surveyPage from '../pages/surveyPage';
 
 const login = new loginPage();
 const survey = new surveyPage();
+const calendar = new calendarPage();
 
 describe('As a POSManager, I should be able to create and design a new survey from Survey module',()=>{
     before('As a POSManager, user is on the home page',()=>{
         cy.viewport(1500,1000);
         login.loginFidexio();
         cy.get('.oe_topbar_name').contains('POSManager10').should('be.visible');
-        login.selectMenu("surveys");
     })
     it.skip('As a POSManager, user verify all buttons before creating a Survey',()=>{
-
+        login.selectMenu("surveys");
         cy.url().should('include','survey')
         
-        //click Create button
         survey.createBtn();
         survey.discardBtn();
         survey.importBtn();
@@ -27,11 +26,26 @@ describe('As a POSManager, I should be able to create and design a new survey fr
         survey.kanbanView();
     })
 })
+describe('As a Posmanager, I should be able to create and to see my meetings and events on my calendar from "Calendar" module'
+,{defaultCommandTimeout:5000},()=>{
+    it('User can create an even by clicking on the time box',()=>{
+        login.selectMenu('Calendar');
+        calendar.monthPicker("Nov");
+        calendar.dayPicker(16);
+        calendar.setMeetingInDayTable("10:00");
+    })
+    it(' Users can erase a created event',()=>{
+        cy.wait(5000);
+        login.selectMenu("Discuss");
+        login.selectMenu("Calendar");
+        calendar.eraseMeeting("Nov",16,"10:00");
+    })
+})
 
 //const faker = require("faker");
-describe('Verify all buttons work after creating a Survey',{defaultCommandTimeout:4000},()=>{
+describe.skip('Verify all buttons work after creating a Survey',{defaultCommandTimeout:4000},()=>{
     it('User create a Survey',()=>{
-        survey.threeDotDelete("afdgs");
+        //survey.threeDotDelete("afdgs");
         //survey.createBtn();
     })
 
