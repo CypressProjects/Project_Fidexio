@@ -3,11 +3,11 @@
 import calendarPage from '../pages/calendarPage';
 import loginPage from '../pages/loginPage';
 import surveyPage from '../pages/surveyPage';
-import { faker } from '@faker-js/faker';
 
-describe('As a POSManager, I should be able to create and desgin a new survey from Survey module',()=>{
-    let login = new loginPage();
-    let survey = new surveyPage();
+const login = new loginPage();
+const survey = new surveyPage();
+
+describe('As a POSManager, I should be able to create and design a new survey from Survey module',()=>{
     before('As a POSManager, user is on the home page',()=>{
         cy.viewport(1500,1000);
         login.loginFidexio();
@@ -15,7 +15,7 @@ describe('As a POSManager, I should be able to create and desgin a new survey fr
         login.selectMenu("surveys");
     })
     it.skip('As a POSManager, user verify all buttons before creating a Survey',()=>{
-        
+
         cy.url().should('include','survey')
         
         //click Create button
@@ -31,21 +31,53 @@ describe('As a POSManager, I should be able to create and desgin a new survey fr
 //const faker = require("faker");
 describe('Verify all buttons work after creating a Survey',{defaultCommandTimeout:4000},()=>{
     it('User create a Survey',()=>{
-        // click 'create' button
-        cy.get('button.o-kanban-button-new').click({force:true});
-        cy.title().should('eq','New - Odoo')
+        survey.threeDotDelete("afdgs");
+        //survey.createBtn();
     })
 
-    it('User click Design Survey button',()=>{
-        const surveyName = faker.animal.dog();
-        cy.log(surveyName);
-        cy.get("input[placeholder='Survey Title']").type(surveyName);
-        // click Design Survey button 
-        cy.get(".o_statusbar_buttons > :first-child").wait(1000).click()
+    it.skip('User click Design Survey button',()=>{
+        cy.log(survey.surveyName);
+        survey.enterSurveyTitle();
+        survey.designSurveyBtn();
     })
     it.skip('User click Start Survey button',()=>{
-
+        
     })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     it.skip('User click Back to Survey button',()=>{
         
     })

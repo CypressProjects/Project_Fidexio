@@ -4,7 +4,7 @@ class loginPage{
 
     loginFidexio(){
         const fidexio = require('../../../../fixtures/fidexioConf.json');
-        cy.visit(fidexio.url);
+        cy.visit(fidexio.url,{failOnStatusCode:false});
 
         cy.get('#login').type(fidexio.email);
         cy.get('#password').type(fidexio.password);
