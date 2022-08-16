@@ -1,8 +1,11 @@
 /// <reference types='Cypress' />
 import { faker } from '@faker-js/faker';
+import loginPage from './loginPage';
 
+
+const login = new loginPage();
 class surveyPage{
-    surveyName = faker.animal.fish();;
+    surveyName = faker.animal.fish();
     createBtn(){
         cy.wait(500);
         cy.contains('button','Create').click().should('be.visible');
@@ -35,12 +38,12 @@ class surveyPage{
     }
 
     enterSurveyTitle(){
-        cy.get("input[placeholder='Survey Title']").type(this.surveyName);
+        cy.get("input[placeholder='Survey Title']").type(this.surveyName + "broken");
     }
     saveBtn(){
         // click 'save' button
         cy.get("button.o_form_button_save").click();
-        cy.get(".o_thread_message_content>p").should('eq','Survey created');
+        cy.get(".o_thread_message_content>p").invoke('text').should('eq','Survey created');
     }
     designSurveyBtn(){
         cy.get(".o_statusbar_buttons > :first-child").wait(1000).click();
@@ -79,16 +82,33 @@ class surveyPage{
                 if(name == surveyName){
                     cy.get("div:nth-child(1)>a").eq(index).click({force:true});
                     cy.get("a[data-type='delete']").eq(index).click();
-                    cy.get(".btn-primary > span").click({force:true});
-                    cy.log("Survey is deleted!");
-                    
 
+                    // into iFrame
+                    //cy.get(".aut-iframe").then(($iframe)=>{
+                    //    const iframeContent = $iframe.contents().find('body');
+                    //    cy.wrap(iframeContent).get('.btn-primary > span').click();
+                    //})
+                    //cy.get('.modal-footer > .btn-primary').click();
+
+                    cy.reload();
+
+                    cy.log("Survey is not deleted!");
                 }
             })
         })
     }
     createSurvey(){
-        
+        this.createBtn();
+        this.surveyName = faker.animal.fish();
+        this.enterSurveyTitle();
+        this.saveBtn();
+        login.selectMenu('Surveys');
+        this.isSurveyCreated(this.surveyName);
+    }
+    isSurveyCreated(surveyName){
+        cy.get(this.surveysList).within(()=>{
+            cy.contains(surveyName).invoke('text').should('eq',surveyName);
+        })
     }
 
 
