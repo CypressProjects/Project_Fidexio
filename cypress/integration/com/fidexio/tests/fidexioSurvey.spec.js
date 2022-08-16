@@ -1,16 +1,13 @@
 /// <reference types='cypress' />
 
-import calendarPage from '../pages/calendarPage';
 import loginPage from '../pages/loginPage';
 import surveyPage from '../pages/surveyPage';
 
 const login = new loginPage();
 const survey = new surveyPage();
-const calendar = new calendarPage();
 
-describe('As a POSManager, I should be able to create and design a new survey from Survey module',()=>{
+describe('As a POSManager, I should be able to create and design a new survey from Survey module',{retries:2},()=>{
     before('As a POSManager, user is on the home page',()=>{
-        cy.viewport(1500,1000);
         login.loginFidexio();
         cy.get('.oe_topbar_name').contains('POSManager10').should('be.visible');
     })
@@ -34,14 +31,18 @@ describe('Verify all buttons work after creating a Survey',{defaultCommandTimeou
         login.selectMenu("surveys");
         cy.url().should('include','survey')
 
-        //survey.threeDotDelete("");
-        survey.createSurvey();
-
+        //survey.createSurvey();
+        //survey.isSurveyCreated(survey.surveyName);
     })
 
-    it.skip('User verify all buttons working properly',()=>{
-        cy.log(survey.surveyName);
-        survey.enterSurveyTitle();
+    it('User verify all buttons working properly',()=>{
+        survey.gotoSurvey("Pink salmon");  // <---  survey.surveyName   replace it later
+
         survey.designSurveyBtn();
+        cy.go('back');
+        survey.testSurvey();
+        cy.go(-1);
+
+        
     })
 })

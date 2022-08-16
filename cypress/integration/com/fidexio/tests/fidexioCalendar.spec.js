@@ -12,7 +12,6 @@ const calendar = new calendarPage();
 describe('As a Posmanager, I should be able to create and to see my meetings and events on my calendar from "Calendar" module'
 ,{defaultCommandTimeout:5000},()=>{
     before('As a POSManager, user is on the home page',()=>{
-        cy.viewport(1500,1000);
         login.loginFidexio();
         cy.get('.oe_topbar_name').contains('POSManager10').should('be.visible');
     })

@@ -38,7 +38,7 @@ class surveyPage{
     }
 
     enterSurveyTitle(){
-        cy.get("input[placeholder='Survey Title']").type(this.surveyName + "broken");
+        cy.get("input[placeholder='Survey Title']").type(this.surveyName);
     }
     saveBtn(){
         // click 'save' button
@@ -88,7 +88,7 @@ class surveyPage{
                     //    const iframeContent = $iframe.contents().find('body');
                     //    cy.wrap(iframeContent).get('.btn-primary > span').click();
                     //})
-                    //cy.get('.modal-footer > .btn-primary').click();
+                    cy.get('.modal-footer > .btn-primary').click().wait(3000);
 
                     cy.reload();
 
@@ -103,12 +103,12 @@ class surveyPage{
         this.enterSurveyTitle();
         this.saveBtn();
         login.selectMenu('Surveys');
-        this.isSurveyCreated(this.surveyName);
     }
     isSurveyCreated(surveyName){
         cy.get(this.surveysList).within(()=>{
             cy.contains(surveyName).invoke('text').should('eq',surveyName);
         })
+
     }
 
 
