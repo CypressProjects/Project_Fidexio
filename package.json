@@ -4,6 +4,7 @@
   "description": "This project tests each menu option on the web home page",
   "main": "index.js",
   "scripts": {
+    "testSkip": "npx cypress run --browser chrome --report mochareports --record --key 6347d324-dc2d-444d-afdb-82f23b98ace4 --spec 'cypress\\integration\\com\\fidexio\\tests\\fidexio.spec.js'",
     "test": "npx cypress run --browser chrome --report mochareports --record --key 6347d324-dc2d-444d-afdb-82f23b98ace4 --spec 'cypress\\integration\\com\\fidexio\\tests\\fidexio.spec.js'"
   },
   "repository": {
@@ -17,8 +18,10 @@
   },
   "homepage": "https://github.com/CypressProjects/Project_Fidexio#readme",
   "devDependencies": {
+    "@faker-js/faker": "^7.4.0",
     "cypress": "^9.7.0",
     "cypress-mochawesome-reporter": "^3.2.0",
+    "faker": "^6.6.6",
     "typescript": "^4.7.4"
   }
 }
