@@ -11,6 +11,7 @@ describe('As a POSManager, I should be able to create and design a new survey fr
         login.loginFidexio();
         cy.get('.oe_topbar_name').contains('POSManager10').should('be.visible');
     })
+
     describe('As a POSManager, user verify all buttons before creating a Survey',()=>{
         it('User clicks each button on the menu',()=>{
             login.selectMenu("surveys");
@@ -22,44 +23,6 @@ describe('As a POSManager, I should be able to create and design a new survey fr
             survey.cancelBtn();
             survey.listView();
             survey.kanbanView();
-        })
-    })
-
-    describe.skip('Verify all buttons work after creating a Survey',()=>{
-        it('User create a Survey',()=>{
-            login.selectMenu("surveys");
-            login.verifySelectedMenu("Surveys")
-    
-            survey.createSurvey();
-            survey.isSurveyCreated(survey.surveyName);
-            //survey.isSurveyCreated("Pink salmon")
-            //survey.threeDotDelete("Pink salmon");
-        })
-    
-        it('User verify all buttons working properly',()=>{
-            survey.gotoSurvey("Pink salmon");  // <---  survey.surveyName   replace it later
-    
-            survey.designSurveyBtn();
-            cy.go('back');
-            survey.testSurvey();
-            cy.go(-1);
-        })
-    })
-    describe.skip('User verify all buttons work in Survey module',()=>{
-        it('User create a Survey',()=>{
-            login.selectMenu("surveys");
-            cy.url().should('include','survey')
-    
-            survey.createSurvey();
-            survey.isSurveyCreated(survey.surveyName);
-            //survey.isSurveyCreated("Pink salmon")
-            //survey.threeDotDelete("Pink salmon");
-        })
-        it('User clicks listed buttons on created survey',()=>{
-            //survey.timeSign();
-            //survey.threeDotEditSurvey();
-            //cy.go(-1);
-            survey.threeDotDelete();
         })
     })
 
@@ -91,7 +54,43 @@ describe('As a POSManager, I should be able to create and design a new survey fr
             survey.isSurveyCreated();
         })
     })
+
+    describe.skip('Verify all buttons work after creating a Survey',()=>{
+        it('User create a Survey',()=>{
+            login.selectMenu("surveys");
+            login.verifySelectedMenu("Surveys")
+    
+            survey.createSurvey();
+            survey.isSurveyCreated(survey.surveyName);
+            //survey.isSurveyCreated("Pink salmon")
+            //survey.threeDotDelete("Pink salmon");
+        })
+    
+        it('User verify all buttons working properly',()=>{
+            survey.gotoSurvey("Pink salmon");  // <---  survey.surveyName   replace it later
+    
+            survey.designSurveyBtn();
+            cy.go('back');
+            survey.testSurvey();
+            cy.go(-1);
+        })
+    })
+
+    describe.skip('User verify all buttons work in Survey module',()=>{
+        it('User create a Survey',()=>{
+            login.selectMenu("surveys");
+            cy.url().should('include','survey')
+    
+            survey.createSurvey();
+            survey.isSurveyCreated(survey.surveyName);
+            //survey.isSurveyCreated("Pink salmon")
+            //survey.threeDotDelete("Pink salmon");
+        })
+        it('User clicks listed buttons on created survey',()=>{
+            //survey.timeSign();
+            //survey.threeDotEditSurvey();
+            //cy.go(-1);
+            survey.threeDotDelete();
+        })
+    })
 })
-
-
-
