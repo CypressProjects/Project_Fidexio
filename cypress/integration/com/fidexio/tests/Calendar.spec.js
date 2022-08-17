@@ -5,7 +5,6 @@ import loginPage from '../pages/loginPage';
 import surveyPage from '../pages/surveyPage';
 
 const login = new loginPage();
-const survey = new surveyPage();
 const calendar = new calendarPage();
 
 
@@ -26,5 +25,6 @@ describe('As a Posmanager, I should be able to create and to see my meetings and
         login.selectMenu("Discuss");
         login.selectMenu("Calendar");
         calendar.eraseMeeting("Nov",16,"10:00");
+        cy.log("Assertion will be added!")
     })
 })
