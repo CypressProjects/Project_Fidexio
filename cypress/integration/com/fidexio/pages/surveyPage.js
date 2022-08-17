@@ -5,7 +5,11 @@ import loginPage from './loginPage';
 
 const login = new loginPage();
 class surveyPage{
-    surveyName = faker.animal.fish();
+    surveyName = faker.animal.fish();                   // first assign
+
+    generateSurveyName(){                                // when new one is needed
+        this.surveyName = faker.animal.fish();
+    }
     createBtn(){
         cy.wait(500);
         cy.contains('button','Create').click().should('be.visible');
@@ -99,16 +103,18 @@ class surveyPage{
     }
     createSurvey(){
         this.createBtn();
-        this.surveyName = faker.animal.fish();
+        this.generateSurveyName();
         this.enterSurveyTitle();
         this.saveBtn();
-        login.selectMenu('Surveys');
     }
     isSurveyCreated(surveyName){
+        login.selectMenu('Surveys');
         cy.get(this.surveysList).within(()=>{
             cy.contains(surveyName).invoke('text').should('eq',surveyName);
         })
-
+    }
+    isSurveyCreatedVerifyWithMessage(){
+        cy.get(".o_thread_message_content>p").invoke('text').should('eq','Survey created');
     }
 
 
