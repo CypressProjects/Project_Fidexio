@@ -12,7 +12,7 @@ describe('As a POSManager, I should be able to create and design a new survey fr
         cy.get('.oe_topbar_name').contains('POSManager10').should('be.visible');
     })
 
-    describe('As a POSManager, user verify all buttons before creating a Survey',()=>{
+    describe('User verify all buttons before creating a Survey',()=>{
         it('User clicks each button on the menu',()=>{
             login.selectMenu("surveys");
             cy.url().should('include','survey')
@@ -55,7 +55,7 @@ describe('As a POSManager, I should be able to create and design a new survey fr
         })
     })
 
-    describe.skip('Verify all buttons work after creating a Survey',()=>{
+    describe.skip('User verify all buttons work after creating a Survey',()=>{
         it('User create a Survey',()=>{
             login.selectMenu("surveys");
             login.verifySelectedMenu("Surveys")
