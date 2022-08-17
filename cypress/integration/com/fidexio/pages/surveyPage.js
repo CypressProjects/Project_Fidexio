@@ -88,7 +88,7 @@ class surveyPage{
                     //    const iframeContent = $iframe.contents().find('body');
                     //    cy.wrap(iframeContent).get('.btn-primary > span').click();
                     //})
-                    cy.get('.modal-footer > .btn-primary').click().wait(3000);
+                    cy.get('.modal-footer > .btn-primary').wait(3000).click().wait(3000);
 
                     cy.reload();
 

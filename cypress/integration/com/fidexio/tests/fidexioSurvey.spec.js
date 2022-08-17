@@ -33,9 +33,11 @@ describe('Verify all buttons work after creating a Survey',{defaultCommandTimeou
 
         //survey.createSurvey();
         //survey.isSurveyCreated(survey.surveyName);
+        survey.isSurveyCreated("Pink salmon")
+        survey.threeDotDelete("Pink salmon");
     })
 
-    it('User verify all buttons working properly',()=>{
+    it.skip('User verify all buttons working properly',()=>{
         survey.gotoSurvey("Pink salmon");  // <---  survey.surveyName   replace it later
 
         survey.designSurveyBtn();
