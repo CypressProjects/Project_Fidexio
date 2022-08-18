@@ -83,18 +83,19 @@ class surveyPage{
         cy.get(this.surveysList).within(()=>{
             cy.get("div:nth-child(2)>h4>span").each(($e,index,$list)=>{
                 const name = $e.text();
+                cy.log(name);
                 if(name == surveyName){
-                    cy.get("div:nth-child(1)>a").eq(index).click({force:true});
-                    cy.get("a[data-type='delete']").eq(index).click();
+                    cy.wait(500);
+                    cy.get("div:nth-child(1)>a").eq(index).scrollIntoView().click({force:true});
+                    cy.wait(500);
+                    cy.get("a[data-type='delete']").eq(index).click({force: true});
 
                     // into iFrame
                     //cy.get(".aut-iframe").then(($iframe)=>{
                     //    const iframeContent = $iframe.contents().find('body');
                     //    cy.wrap(iframeContent).get('.btn-primary > span').click();
                     //})
-                    cy.get('.modal-footer > .btn-primary').wait(3000).click().wait(3000);
-
-                    cy.reload();
+                    //cy.get('.modal-footer > .btn-primary').wait(3000).click().wait(3000);
 
                     cy.log("Survey is not deleted!");
                 }

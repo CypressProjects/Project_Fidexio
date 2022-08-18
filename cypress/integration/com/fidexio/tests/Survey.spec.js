@@ -6,91 +6,97 @@ import surveyPage from '../pages/surveyPage';
 const login = new loginPage();
 const survey = new surveyPage();
 
-describe('As a POSManager, I should be able to create and design a new survey from Survey module',()=>{
-    before('As a POSManager, user is on the home page',()=>{
+
+    beforeEach('As a POSManager, user is on the Surveys page',()=>{
         login.loginFidexio();
         cy.get('.oe_topbar_name').contains('POSManager10').should('be.visible');
+
+        login.selectMenu("surveys");
+        login.verifySelectedMenu("Surveys")
     })
 
-    describe('User verify all buttons before creating a Survey',()=>{
-        it('User clicks each button on the menu',()=>{
-            login.selectMenu("surveys");
-            cy.url().should('include','survey')
+   describe.skip('User verify all buttons before creating a Survey',()=>{
+       it('User clicks each button on the menu',()=>{
 
-            survey.createBtn();
-            survey.discardBtn();
-            survey.importBtn();
-            survey.cancelBtn();
-            survey.listView();
-            survey.kanbanView();
-        })
-    })
+           survey.createBtn();
+           survey.discardBtn();
+           survey.importBtn();
+           survey.cancelBtn();
+           survey.listView();
+           survey.kanbanView();
+       })
+   })
 
     describe('User verify that the "Survey created" message appears under the survey form sheet',()=>{
         it('User clicks "Surveys" option at the top bar of the home page',()=>{
-            login.selectMenu("surveys");
-            login.verifySelectedMenu("Surveys")
-        })
-        it('User clicks "create" button',()=>{
+            cy.log("User clicks 'create' button");
             survey.createBtn();
-        })
-        it('User enters generated Survey Title on upcoming window',()=>{
+
+            cy.log('User enters generated Survey Title on upcoming window');
             survey.generateSurveyName();
             survey.enterSurveyTitle();
-        })
-        it('User clicks "Save" button',()=>{
+
+            cy.log("User clicks 'Save' button");
             survey.saveBtn();
-        })
-        it('User verify that "Survey created" message appears under the survey form sheet',()=>{
+
+            cy.log("User verify that 'Survey created' message appears under the survey form sheet");
             survey.isSurveyCreatedVerifyWithMessage();
+
+            cy.log("User deletes created survey");
+            login.selectMenu('Surveys');
+            survey.threeDotDelete(survey.surveyName);
         })
     })
 
-    describe('User verify that the user should be able to see created survey is listed after clicking the Surveys module',()=>{
+   describe.only('User verify that the user should be able to see created survey is listed after clicking the Surveys module',()=>{
         it('User create a Survey',()=>{
             survey.createSurvey();
-        })
-        it('User verify that user should see created survey in Survey module',()=>{
-            survey.isSurveyCreated();
+
+            cy.log("User verify that user should see created survey in Survey module");
+            //survey.isSurveyCreated();
+            cy.wait(2000);
+            cy.log("User deletes created survey");
+            login.selectMenu('Surveys');
+            survey.threeDotDelete(survey.surveyName);
         })
     })
 
-    describe.skip('User verify all buttons work after creating a Survey',()=>{
+    describe('User verify all buttons work after creating a Survey',()=>{
         it('User create a Survey',()=>{
-            login.selectMenu("surveys");
-            login.verifySelectedMenu("Surveys")
-    
+   
             survey.createSurvey();
             survey.isSurveyCreated(survey.surveyName);
-            //survey.isSurveyCreated("Pink salmon")
-            //survey.threeDotDelete("Pink salmon");
-        })
-    
-        it('User verify all buttons working properly',()=>{
-            survey.gotoSurvey("Pink salmon");  // <---  survey.surveyName   replace it later
+
+            
+
+            cy.log('User verify all buttons working properly');
+
+            survey.gotoSurvey(survey.surveyName);  // <---  survey.surveyName   replace it later
     
             survey.designSurveyBtn();
             cy.go('back');
             survey.testSurvey();
             cy.go(-1);
+
+            cy.log("User deletes created survey");
+            survey.threeDotDelete(survey.surveyName);
         })
     })
 
-    describe.skip('User verify all buttons work in Survey module',()=>{
+    describe('User verify all buttons work in Survey module',()=>{
         it('User create a Survey',()=>{
             login.selectMenu("surveys");
             cy.url().should('include','survey')
     
             survey.createSurvey();
             survey.isSurveyCreated(survey.surveyName);
-            //survey.isSurveyCreated("Pink salmon")
-            //survey.threeDotDelete("Pink salmon");
-        })
-        it('User clicks listed buttons on created survey',()=>{
+
+            cy.log("User clicks listed buttons on created survey");
             //survey.timeSign();
             //survey.threeDotEditSurvey();
             //cy.go(-1);
-            survey.threeDotDelete();
+
+            cy.log("User deletes created survey");
+            survey.threeDotDelete(survey.surveyName);
         })
     })
-})

@@ -3,14 +3,17 @@
 class calendarPage {
   day;
   monthPicker(expectedMonth) {
+    //let actualMonth = cy.wrap(this.getCurrentMonth()).invoke('val');
     let actualMonth;
      cy.get(".ui-datepicker-month").then(($data)=>{
       actualMonth = $data.text();
     })
 
+    cy.log(actualMonth);
+
     let list = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec",];
 
-    cy.wait(200).then(()=>{
+    cy.then(()=>{
       for(let i = 0; i < list.length; i++){
         if(list[i] == actualMonth){
             actualMonth = i;
@@ -36,6 +39,12 @@ class calendarPage {
       }
     })
   }
+  getCurrentMonth(){
+    return new Promise(resolve =>{
+      resolve("Nov");
+    })
+  }
+
   dayPicker(day){
     cy.get(".ui-datepicker-calendar>tbody").within(()=>{
       cy.contains('a',day).click();
