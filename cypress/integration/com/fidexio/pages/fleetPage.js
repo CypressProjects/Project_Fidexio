@@ -8,7 +8,7 @@ leftSideMenuSelection(menuOption){
     cy.get(".o_sub_menu_content>div:nth-of-type(21)>ul").each(($li, index, $list)=>{
         if($li.contents().find(menuOption)){
             cy.contains(menuOption).click({force:true});
-            cy.wait(1000).title().should('contain',menuOption);
+            cy.wait(2000).title().should('contain',menuOption);
         }else cy.log("Menu option doesn't exist!")
     })
 }
@@ -42,9 +42,6 @@ selectMaker(maker){
         cy.wait(4000);
         cy.get("tbody.ui-sortable").contains(maker).click({force:true})
     })
-    
-
-
 }
 btnGroup = ".o_cp_sidebar > .btn-group";
 attachments(){
