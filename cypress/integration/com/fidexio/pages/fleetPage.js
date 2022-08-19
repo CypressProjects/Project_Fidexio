@@ -5,11 +5,9 @@ import {faker} from '@faker-js/faker';
 class fleetPage{
     vehicleModeName = faker.vehicle.model();
 leftSideMenuSelection(menuOption){
-    cy.get(".o_sub_menu_content>div:nth-of-type(21)>ul").each(($li, index, $list)=>{
-        if($li.contents().find(menuOption)){
-            cy.contains(menuOption).click({force:true});
-            cy.wait(2000).title().should('contain',menuOption);
-        }else cy.log("Menu option doesn't exist!")
+    cy.get(".o_sub_menu_content>div:nth-of-type(21)>ul").each(($ul, index, $list)=>{
+        cy.wrap($ul).find('li').contains(menuOption).click({force:true});
+        cy.title().should('contain',menuOption);
     })
 }
 listBtnLocater = ".o_cp_buttons";
