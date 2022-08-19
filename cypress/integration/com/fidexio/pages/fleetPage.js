@@ -33,13 +33,13 @@ enterModelName(){
 }
 selectMaker(maker){
     cy.get("[name='brand_id']>div>input").click({force:true});
-    cy.wait(5000);
+    cy.wait(2000);
     cy.get(".ui-autocomplete.ui-front.ui-menu.ui-widget.ui-widget-content").within(()=>{
         cy.contains("Search More...").click({force:true})
     })
     cy.get(".modal-dialog.modal-lg > .modal-content").within(()=>{
         cy.get("input[placeholder='Search...']").type(maker + "{enter}");
-        cy.wait(4000);
+        cy.wait(2000);
         cy.get("tbody.ui-sortable").contains(maker).click({force:true})
     })
 }
@@ -54,15 +54,15 @@ actions(action){
         case "Delete":
             cy.get(actionPath).within(()=>{
                 cy.contains("Delete").click();
-                cy.get("body>div:last-of-type").within(()=>{
-                    cy.contains("Ok").click({force:true});
-                })
-            })
+            });
+            cy.get("body>div:last-of-type").within(()=>{
+                cy.contains("Ok").click({force:true});
+            });
         break;
         case "Duplicate":
             cy.get(actionPath).within(()=>{
                 cy.contains("Duplicate").click();
-            })
+            });
         break;
     }
 }
