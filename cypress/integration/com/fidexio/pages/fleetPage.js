@@ -63,33 +63,6 @@ actions(action){
             });
         break;
     }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+ }
 }
 export default fleetPage;
