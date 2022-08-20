@@ -14,7 +14,7 @@ before('As a POSManager, user is on the home page',()=>{
     cy.url().should('include','fleet')
 })
 
-describe.skip('Pos manager can create new Vehicle Model',()=>{   
+describe('Pos manager can create new Vehicle Model',()=>{   
     it('User navigates to Fleet page',()=>{
         fleet.leftSideMenuSelection("Vehicle Model");
         fleet.createBtn();
@@ -32,19 +32,30 @@ describe.skip('Pos manager can create new Vehicle Model',()=>{
 })
 describe('User should see Vehicles options on the left side of the page',()=>{
     it('User should see Vehicles options on the left side of the page respectively',()=>{
-        fleet.leftSideMenuSelection("Vehicles");
-        fleet.leftSideMenuSelection("Vehicles Odometer");
-        fleet.leftSideMenuSelection("Vehicle Costs");
-        fleet.leftSideMenuSelection("Vehicles Contracts");
-        fleet.leftSideMenuSelection("Vehicles Fuel Logs");
-        fleet.leftSideMenuSelection("Vehicles Services Logs");
-        fleet.leftSideMenuSelection("Costs");
-        fleet.leftSideMenuSelection("Indicative Costs");
-        fleet.leftSideMenuSelection("Vehicle Model");
-        fleet.leftSideMenuSelection("Model make of Vehicle");
-        fleet.leftSideMenuSelection("Service Types");
-        fleet.leftSideMenuSelection("Contract Types");
-        fleet.leftSideMenuSelection("Vehicle Status");
-        fleet.leftSideMenuSelection("Vehicle Tags");        
+        fleet.leftSideMenuSelection(true, "Vehicles");
+        fleet.leftSideMenuSelection(true, "Vehicles Odometer");
+        fleet.leftSideMenuSelection(true, "Vehicle Costs");
+        fleet.leftSideMenuSelection(true, "Vehicles Contracts");
+        fleet.leftSideMenuSelection(true, "Vehicles Fuel Logs");
+        fleet.leftSideMenuSelection(true, "Vehicles Services Logs");
+        fleet.leftSideMenuSelection(true, "Costs");
+        fleet.leftSideMenuSelection(true, "Indicative Costs");
+        fleet.leftSideMenuSelection(true, "Vehicle Model");
+        fleet.leftSideMenuSelection(true, "Model make of Vehicle");
+        fleet.leftSideMenuSelection(true, "Service Types");
+        fleet.leftSideMenuSelection(true, "Contract Types");
+        fleet.leftSideMenuSelection(true, "Vehicle Status");
+        fleet.leftSideMenuSelection(true, "Vehicle Tags");        
+    })
+})
+describe("User verify that 'Vehicle Costs' option can be opened",()=>{
+    it("User should see 'Vehicle Costs' option text at the top of the page",()=>{
+        fleet.leftSideMenuSelection(false, "Vehicle Costs");
+        fleet.verifyOptionTitle("Vehicle Costs");
+    })
+})
+describe("User verify that 'Create' button is clickable",()=>{
+    it('',()=>{
+
     })
 })

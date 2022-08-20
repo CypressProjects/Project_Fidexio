@@ -4,12 +4,20 @@ import {faker} from '@faker-js/faker';
 
 class fleetPage{
     vehicleModeName = faker.vehicle.model();
-leftSideMenuSelection(menuOption){
+leftSideMenuSelection(verifyTitle, menuOption){
+    let verifyTitleDefault = false;
     cy.get(".o_sub_menu_content>div:nth-of-type(21)>ul").each(($ul, index, $list)=>{
         cy.wrap($ul).find('li').contains(menuOption).click({force:true});
-        cy.title().should('contain',menuOption);
+        if(verifyTitle || verifyTitle){
+            cy.title().should('contain',menuOption);
+        }
     })
 }
+
+verifyOptionTitle(titleName){
+    cy.get(".breadcrumb>li").invoke('text').should('eq',titleName);
+}
+
 listBtnLocater = ".o_cp_buttons";
 createBtn(){
     cy.get(this.listBtnLocater).contains("Create").click();
