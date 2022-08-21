@@ -97,6 +97,7 @@ class surveyPage{
                     //})
                     //cy.get('.modal-footer > .btn-primary').wait(3000).click().wait(3000);
 
+                    
                     cy.log("Survey is not deleted!");
                 }
             })
