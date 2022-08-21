@@ -4,17 +4,27 @@ import {faker} from '@faker-js/faker';
 
 class fleetPage{
     vehicleModeName = faker.vehicle.model();
-leftSideMenuSelection(verifyTitle, menuOption){
-    let verifyTitleDefault = false;
+/*leftSideMenuSelection2(verifyTitle, menuOption){
     cy.get(".o_sub_menu_content>div:nth-of-type(21)>ul").each(($ul, index, $list)=>{
-        cy.wrap($ul).find('li').contains(menuOption).click({force:true});
-        if(verifyTitle || verifyTitle){
-            cy.title().should('contain',menuOption);
-        }
+        cy.wrap($ul).find('li').contains(menuOption).click({force:true}).then(()=>{
+            if(false || verifyTitle){
+                cy.title().should('contain',menuOption);
+            }
+        });
     })
+}*/
+
+leftSideMenuSelection(verifyTitle, menuOption){
+    cy.get(".o_sub_menu_content>div:nth-of-type(21)>ul")
+        .contains(menuOption).click({force:true}).then(()=>{
+            if(false || verifyTitle){
+                cy.title().should('contain',menuOption);
+            }
+        });
 }
 
 verifyOptionTitle(titleName){
+    cy.wait(3000);
     cy.get(".breadcrumb>li").invoke('text').should('eq',titleName);
 }
 
@@ -24,9 +34,13 @@ createBtn(){
 
     cy.title().should('contain','New');
 }
-saveBtn(){
-    cy.get(this.listBtnLocater).contains("Save").click();
-    cy.title().should('contain',this.vehicleModeName);
+saveBtn(verifyTitle){
+    cy.get(this.listBtnLocater).contains("Save").click().then(()=>{
+        if(false || verifyTitle){
+            cy.title().should('contain',this.vehicleModeName);
+        }
+    });
+    
 }
 discardBtn(){
     cy.get(this.listBtnLocater).contains("Discard").click().wait(1000).should('not.be.visible');
@@ -46,13 +60,14 @@ selectMaker(maker){
     cy.get(".modal-dialog.modal-lg > .modal-content").within(()=>{
         cy.get("input[placeholder='Search...']").type(maker + "{enter}");
         cy.wait(2000);
-        cy.get("tbody.ui-sortable").contains(maker).click({force:true})
+        cy.get("tbody.ui-sortable").contains(maker).click({force:true});
     })
 }
 btnGroup = ".o_cp_sidebar > .btn-group";
 attachments(){
 
 }
+
 actions(action){
     let actionPath = this.btnGroup + ">:nth-of-type(3)";
     cy.get(actionPath).click();
@@ -72,5 +87,131 @@ actions(action){
         break;
     }
  }
+
+ costDetails(vehicle, type, totalPrice, costDescription, date){
+    cy.get(".o_form_sheet>.o_group").within(($data)=>{
+        // checking whether we in Cost Details
+        cy.wrap($data).should('contain','Cost Details');
+
+        // Cost Details Section
+        cy.get("table:first-of-type").within(()=>{
+
+            // Vehicle
+            cy.get("tbody>:first-child").click();
+            cy.wait(1000);
+            //cy.get(".ui-autocomplete.ui-front.ui-menu.ui-widget.ui-widget-content:first-of-type")
+            cy.xpath("//ul[@class='ui-autocomplete ui-front ui-menu ui-widget ui-widget-content'][1]//a")
+            .contains("Search More...").click({force:true});
+            cy.xpath("//div[@class='modal-dialog modal-lg']//input[@class='o_searchview_input']")
+                .clear().type(vehicle + "{enter}");
+            cy.xpath("//tbody[@class='ui-sortable']").contains(vehicle).click({force:true});
+            //cy.get("tbody.ui-sortable").contains(vehicle).click({force:true});
+
+            // Type
+            cy.get("tbody>:nth-child(2)").click();
+            cy.wait(1000);
+            //cy.get(".ui-autocomplete.ui-front.ui-menu.ui-widget.ui-widget-content:nth-of-type(2)")
+            cy.xpath("//ul[@class='ui-autocomplete ui-front ui-menu ui-widget ui-widget-content'][2]")
+                .contains(type).click({force:true});
+
+            // Total Price
+            cy.get("tbody>:nth-child(3)").clear().type(totalPrice);
+
+            // Cost Description
+            cy.get("tbody>:nth-child(4)").clear().type(costDescription);
+        })
+
+        // Date section
+        cy.get(".o_datepicker_input.o_input").clear().type(date);
+    })
+ }
+ costDetails_Vehicle(vehicle){
+    cy.get(".o_form_sheet>.o_group").within(($data)=>{
+        // checking whether we in Cost Details
+        cy.wrap($data).should('contain','Cost Details');
+
+        // Cost Details Section
+        cy.get("table:first-of-type").within(()=>{
+
+            // Vehicle
+            cy.get("tbody>:first-child").click();
+            cy.wait(1000);
+            //cy.get(".ui-autocomplete.ui-front.ui-menu.ui-widget.ui-widget-content:first-of-type")
+            cy.xpath("//ul[@class='ui-autocomplete ui-front ui-menu ui-widget ui-widget-content'][1]//a")
+            .contains("Search More...").click({force:true});
+            cy.xpath("//div[@class='modal-dialog modal-lg']//input[@class='o_searchview_input']")
+                .clear().type(vehicle + "{enter}");
+            cy.xpath("//tbody[@class='ui-sortable']").contains(vehicle).click({force:true});
+        })
+    })
+ }
+ costDetails_Type(type){
+    cy.get(".o_form_sheet>.o_group").within(($data)=>{
+        // checking whether we in Cost Details
+        cy.wrap($data).should('contain','Cost Details');
+
+        // Cost Details Section
+        cy.get("table:first-of-type").within(()=>{
+            // Type
+            cy.get("tbody>:nth-child(2)").click();
+            cy.wait(1000);
+            //cy.get(".ui-autocomplete.ui-front.ui-menu.ui-widget.ui-widget-content:nth-of-type(2)")
+            cy.xpath("//ul[@class='ui-autocomplete ui-front ui-menu ui-widget ui-widget-content'][2]")
+                .contains(type).click({force:true});
+        })
+    })
+ }
+ costDetails_TotalPrice(totalPrice){
+    cy.get(".o_form_sheet>.o_group").within(($data)=>{
+        // checking whether we in Cost Details
+        cy.wrap($data).should('contain','Cost Details');
+
+        // Cost Details Section
+        cy.get("table:first-of-type").within(()=>{
+
+            // Total Price
+            cy.get("tbody>:nth-child(3)").clear().type(totalPrice);
+        })
+    })
+ }
+ costDetails_CostDescription(costDescription){
+    cy.get(".o_form_sheet>.o_group").within(($data)=>{
+        // checking whether we in Cost Details
+        cy.wrap($data).should('contain','Cost Details');
+
+        // Cost Details Section
+        cy.get("table:first-of-type").within(()=>{
+
+            // Cost Description
+            cy.get("tbody>:nth-child(4)").clear().type(costDescription);
+        })
+    })
+ }
+ costDetails_Date(date){
+    cy.get(".o_form_sheet>.o_group").within(($data)=>{
+        // checking whether we in Cost Details
+        cy.wrap($data).should('contain','Cost Details');
+
+        // Date section
+        cy.get(".o_datepicker_input.o_input").clear().type(date);
+    })
+ }
+ verifyCostDetailsLabels(){
+    //cy.get(".o_form_sheet>.o_group").find('label').should(($lis)=>{
+    //    expect($lis).to.have.any.keys(["Vehicle","Type","Total Price", "Cost Description","Date", "Parent"]);
+    //})
+    cy.get(".o_form_sheet>.o_group").within(($data)=>{
+        cy.wrap($data).should('contain',"Vehicle");
+        cy.wrap($data).should('contain',"Type");
+        cy.wrap($data).should('contain',"Total Price");
+        cy.wrap($data).should('contain',"Date");
+    })
+}
+
+
+
+
+
+
 }
 export default fleetPage;
