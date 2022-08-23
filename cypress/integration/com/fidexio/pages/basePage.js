@@ -3,8 +3,9 @@
 class basePage {
 
     controlBtn(buttonName){
+        cy.wait(3000);
         cy.get(".o_cp_buttons").within(()=>{
-            cy.contains(buttonName).click();
+            cy.contains(buttonName).click({force:true});
         })
     }
 

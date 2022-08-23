@@ -3,19 +3,23 @@
 import basePage from "./basePage";
 
 class fuelLog extends basePage{
-
+    
     selectVehicle(vehicle){
-        cy.get("#o_field_input_6").click({force:true});
-        cy.wait(5000);
-        cy.get("#ui-id-1").within(()=>{
+        selectedVehicleName;
+        cy.get("div[name='vehicle_id']>div>input").click({force:true});
+        //cy.wait(3000);
+        cy.get(".ui-autocomplete.ui-front").first().within(()=>{
             cy.contains("Search More...").click({force:true})
         })
         cy.get(".table-responsive>table>tbody").within(()=>{
             cy.get("tr:nth-of-type("+ vehicle + ")").within((path)=>{
-                this.selectedVehicleName = cy.get("td:nth-of-type(2)").invoke('text');
                 cy.wrap(path).click({force:true});
             })
         })
+    }
+
+    getSelectedVehicleName(){
+        this.selectVehicle =  cy.get("td:nth-of-type(2)>a[name='vehicle_id']").invoke('text');
     }
 }
 
