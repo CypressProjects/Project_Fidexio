@@ -36,6 +36,30 @@ class basePage {
         });
     }
 
+    attachments(){
+
+    }
+    btnGroup = ".o_cp_sidebar > .btn-group";
+    actions(action){
+        let actionPath = this.btnGroup + ">:nth-of-type(3)";
+        cy.get(actionPath).click();
+        switch(action){
+            case "Delete":
+                cy.get(actionPath).within(()=>{
+                    cy.contains("Delete").click();
+                });
+                cy.get("body>div:last-of-type").within(()=>{
+                    cy.contains("Ok").click({force:true});
+                });
+            break;
+            case "Duplicate":
+                cy.get(actionPath).within(()=>{
+                    cy.contains("Duplicate").click();
+                });
+            break;
+        }
+     }
+
 }
 
 export default basePage;

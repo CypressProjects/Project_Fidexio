@@ -46,30 +46,6 @@ selectMaker(maker){
         cy.get("tbody.ui-sortable").contains(maker).click({force:true});
     })
 }
-btnGroup = ".o_cp_sidebar > .btn-group";
-attachments(){
-
-}
-
-actions(action){
-    let actionPath = this.btnGroup + ">:nth-of-type(3)";
-    cy.get(actionPath).click();
-    switch(action){
-        case "Delete":
-            cy.get(actionPath).within(()=>{
-                cy.contains("Delete").click();
-            });
-            cy.get("body>div:last-of-type").within(()=>{
-                cy.contains("Ok").click({force:true});
-            });
-        break;
-        case "Duplicate":
-            cy.get(actionPath).within(()=>{
-                cy.contains("Duplicate").click();
-            });
-        break;
-    }
- }
 
  costDetails(vehicle, type, totalPrice, costDescription, date){
     cy.get(".o_form_sheet>.o_group").within(($data)=>{
