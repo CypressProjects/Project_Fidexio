@@ -1,28 +1,8 @@
 /// <reference types='Cypress' />
 
-class fuelLog{
-    selectedVehicleName;
-    controlBtn(buttonName){
-        cy.get(".o_cp_buttons").within(()=>{
-            cy.contains(buttonName).click();
-        })
-    }
-    isBtnClicked(buttonName){
-        switch(buttonName){
-            case "Create":
-                cy.title().should('contain',"New");
-            break;
-            case "Save":
-                cy.title().should('contain',"");
-            break;
-            case "Import":
-                cy.title().should('contain',"Import a File");
-            break;
-            case "Discard":
-                cy.title().should('contain',"Vehicles Fuel Logs");
-            break;
-        }
-    }
+import basePage from "./basePage";
+
+class fuelLog extends basePage{
 
     selectVehicle(vehicle){
         cy.get("#o_field_input_6").click({force:true});

@@ -1,27 +1,10 @@
 /// <reference types='Cypress' />
 import {faker} from '@faker-js/faker';
+import basePage from './basePage';
 
 
-class fleetPage{
+class fleetPage extends basePage{
     vehicleModeName = faker.vehicle.model();
-/*leftSideMenuSelection2(verifyTitle, menuOption){
-    cy.get(".o_sub_menu_content>div:nth-of-type(21)>ul").each(($ul, index, $list)=>{
-        cy.wrap($ul).find('li').contains(menuOption).click({force:true}).then(()=>{
-            if(false || verifyTitle){
-                cy.title().should('contain',menuOption);
-            }
-        });
-    })
-}*/
-
-leftSideMenuSelection(verifyTitle, menuOption){
-    cy.get(".o_sub_menu_content>div:nth-of-type(21)>ul")
-        .contains(menuOption).click({force:true}).then(()=>{
-            if(false || verifyTitle){
-                cy.title().should('contain',menuOption);
-            }
-        });
-}
 
 verifyOptionTitle(titleName){
     cy.wait(3000);
