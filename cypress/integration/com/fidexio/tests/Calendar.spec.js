@@ -21,9 +21,9 @@ describe('As a Posmanager, I should be able to create and to see my meetings and
         calendar.monthPicker("Nov");
         calendar.dayPicker(16);
         calendar.setMeetingInDayTable("10:00");
+        cy.wait(3000);
     })
     it(' Users can erase a created event',()=>{
-        cy.wait(3000);
         calendar.eraseMeeting("Nov",16,"10:00");
         cy.log("Assertion will be added!")
     })
