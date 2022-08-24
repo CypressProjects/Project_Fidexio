@@ -134,7 +134,7 @@ describe("Verify that 'Vehicle' dropdown opens and a vehicle can be selected",()
         fleet.actions("Delete");
     })
 })
-describe.only("Verify that after entering non numeric characters into 'Total Price' and saving, 'The following fields are invalid' is displayed"
+describe("Verify that after entering non numeric characters into 'Total Price' and saving, 'The following fields are invalid' is displayed"
 ,()=>{
     it("User should see 'The following fields are invalid:' error message after saving",()=>{
         fleet.leftSideMenuSelection("Vehicle Costs", false);
@@ -151,5 +151,37 @@ describe.only("Verify that after entering non numeric characters into 'Total Pri
 
         fleet.notificationMessage("Total Price");
 
+    })
+})
+describe.only("User verify that user can see the new vehicle cost on the list",()=>{
+    it("User should see the new vehicle cost at the top of the list as dated",()=>{
+        fleet.leftSideMenuSelection("Vehicle Costs", false);
+        cy.log("User clicks Create button");
+        cy.wait(2000);
+
+        fleet.createBtn();
+        fleet.costDetails_Vehicle("Mercedes/Class A");
+        fleet.costDetails_Type("Tax roll");
+        fleet.costDetails_TotalPrice("10000");
+        fleet.costDetails_CostDescription("This is a demo vehicle");
+        fleet.costDetails_Date("10/01/2020");
+
+        cy.wait(2000);
+
+        fleet.saveBtn(false);
+
+        cy.log("User goes back to the Vehicle Costs menu");
+        fleet.leftSideMenuSelection("Vehicle Costs", false);
+
+        cy.log("User verifies if the created log on the list");
+
+        fleet.selectVehicleFromList("Mercedes/Class A")
+
+        
+
+
+
+        cy.log("Cost Details is created successfully").wait(5000);
+        fleet.actions("Delete");
     })
 })

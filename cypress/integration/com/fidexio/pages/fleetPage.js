@@ -174,6 +174,9 @@ notificationMessage(text){
     cy.xpath("//div[@class='o_notification_content']/ul/li").invoke('text')
         .should('contain',text);
 }
+verifyVehicleFromList(vehicleName){
+    cy.get("table.table>tbody").contains(vehicleName).first().click({force:true});
+}
 
 
 
