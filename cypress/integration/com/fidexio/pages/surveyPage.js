@@ -96,12 +96,14 @@ class surveyPage{
                     //    cy.wrap(iframeContent).get('.btn-primary > span').click();
                     //})
                     //cy.get('.modal-footer > .btn-primary').wait(3000).click().wait(3000);
-
-                    
-                    cy.log("Survey is not deleted!");
                 }
             })
         })
+
+        //cy.xpath("//button[@class='btn btn-sm btn-primary']").click();
+        cy.get('.btn-primary > span').click();
+
+        cy.log("Deleted Successfully!");
     }
     createSurvey(){
         this.createBtn();
