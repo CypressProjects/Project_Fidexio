@@ -175,9 +175,9 @@ describe.only("User verify that user can see the new vehicle cost on the list",(
 
         cy.log("User verifies if the created log on the list");
 
-        fleet.selectVehicleFromList("Mercedes/Class A")
+        fleet.selectVehicleFromList("Mercedes/Class A")    // <--- wip
 
-        
+
 
 
 
