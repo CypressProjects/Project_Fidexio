@@ -88,7 +88,7 @@ describe("Verify that 'Vehicle' dropdown opens and a vehicle can be selected",()
         fleet.actions("Delete");
     })
 })
-describe.only("Verify that 'Vehicle' dropdown opens and a vehicle can be selected",()=>{
+describe("Verify that 'Vehicle' dropdown opens and a vehicle can be selected",()=>{
     it("User should be able to select a vehicle from Vehicle dropdown",()=>{
         fleet.leftSideMenuSelection("Vehicle Costs", false);
         cy.log("User clicks Create button");
@@ -134,7 +134,7 @@ describe.only("Verify that 'Vehicle' dropdown opens and a vehicle can be selecte
         fleet.actions("Delete");
     })
 })
-describe("Verify that after entering non numeric characters into 'Total Price' and saving, 'The following fields are invalid' is displayed"
+describe.only("Verify that after entering non numeric characters into 'Total Price' and saving, 'The following fields are invalid' is displayed"
 ,()=>{
     it("User should see 'The following fields are invalid:' error message after saving",()=>{
         fleet.leftSideMenuSelection("Vehicle Costs", false);

@@ -167,11 +167,12 @@ selectMaker(maker){
     })
 }
 notificationMessage(text){
-    cy.get(".o_notification_title>span").should('eq','The following fields are invalid:');
-    cy.get("o_notification_content").should('contain',text);
+    //cy.get(".o_notification_title>span").invoke('text').should('eq','The following fields are invalid:');
+    cy.xpath("//div[@class='o_notification_title']").then(($data)=>{
+        cy.wrap($data).should('contain','The following fields are invalid:')
+            .and().should('contain',text);
+    })
 }
-
-
 
 
 
