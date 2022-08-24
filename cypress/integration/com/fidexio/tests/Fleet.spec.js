@@ -66,6 +66,28 @@ describe("User verify that 'Create' button is clickable on the 'Vehicle Costs'",
         fleet.verifyCostDetailsLabels();
     })
 })
+describe("Verify that 'Vehicle' dropdown opens and a vehicle can be selected",()=>{
+    it("User should be able to select a vehicle from Vehicle dropdown",()=>{
+        fleet.leftSideMenuSelection("Vehicle Costs", false);
+        cy.log("User clicks Create button");
+        cy.wait(2000);
+        fleet.createBtn();
+
+        //fleet.costDetails("Mercedes/Class A","Tax roll", "10000", "This is a demo vehicle","10/01/2020");
+        fleet.costDetails_Vehicle("Mercedes/Class A");
+        fleet.costDetails_Type("Tax roll");
+        fleet.costDetails_TotalPrice("10000");
+        fleet.costDetails_CostDescription("This is a demo vehicle");
+        fleet.costDetails_Date("10/01/2020");
+
+        cy.wait(2000);
+
+        fleet.saveBtn(false);
+
+        cy.log("Cost Details is created successfully").wait(5000);
+        fleet.actions("Delete");
+    })
+})
 describe.only("Verify that 'Vehicle' dropdown opens and a vehicle can be selected",()=>{
     it("User should be able to select a vehicle from Vehicle dropdown",()=>{
         fleet.leftSideMenuSelection("Vehicle Costs", false);
@@ -73,12 +95,61 @@ describe.only("Verify that 'Vehicle' dropdown opens and a vehicle can be selecte
         cy.wait(2000);
         fleet.createBtn();
 
-        fleet.costDetails("Mercedes/Class A","Tax roll", "10000", "This is a demo vehicle","10/01/2020");
+        //fleet.costDetails("Mercedes/Class A","Tax roll", "10000", "This is a demo vehicle","10/01/2020");
+        fleet.costDetails_Vehicle("Mercedes/Class A");
+
+        cy.log("Trying different types...")
+        fleet.costDetails_Type("Tax roll");
+        cy.wait(2000);
+        fleet.costDetails_Type("Summer tires");
+        cy.wait(2000);
+        fleet.costDetails_Type("Repair and maintenance");
+        cy.wait(2000);
+        fleet.costDetails_Type("Snow Tires");
+
+        cy.log("Trying different numberic characters...")
+        fleet.costDetails_TotalPrice("10000");
+        cy.wait(2000);
+        fleet.costDetails_TotalPrice("10000,9999");
+        cy.wait(2000);
+        fleet.costDetails_TotalPrice("100.900");
+        cy.wait(2000);
+        fleet.costDetails_TotalPrice("10,000.000");
+        cy.wait(2000);
+
+        cy.log("Cost Description")
+        fleet.costDetails_CostDescription("This is a demo vehicle");
+
+        cy.log("Trying different dates")
+        fleet.costDetails_Date("10/01/2000");
+        cy.wait(2000);
+        fleet.costDetails_Date("10/01/1965");
+        cy.wait(2000);
+        fleet.costDetails_Date("10/01/2023");
         cy.wait(2000);
 
         fleet.saveBtn(false);
 
         cy.log("Cost Details is created successfully").wait(5000);
         fleet.actions("Delete");
+    })
+})
+describe("Verify that after entering non numeric characters into 'Total Price' and saving, 'The following fields are invalid' is displayed"
+,()=>{
+    it("User should see 'The following fields are invalid:' error message after saving",()=>{
+        fleet.leftSideMenuSelection("Vehicle Costs", false);
+        cy.log("User clicks Create button");
+        cy.wait(2000);
+        fleet.createBtn();
+
+        cy.log("User selects a vehicle: ")
+        fleet.costDetails_Vehicle("Mercedes/Class A");
+
+        fleet.costDetails_TotalPrice("One thousand euro");
+
+        fleet.saveBtn(false);
+
+        fleet.notificationMessage("Total Price");
+
     })
 })

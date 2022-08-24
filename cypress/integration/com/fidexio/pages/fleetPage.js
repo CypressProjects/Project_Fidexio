@@ -47,7 +47,7 @@ selectMaker(maker){
     })
 }
 
- costDetails(vehicle, type, totalPrice, costDescription, date){
+/*costDetails(vehicle, type, totalPrice, costDescription, date){
     cy.get(".o_form_sheet>.o_group").within(($data)=>{
         // checking whether we in Cost Details
         cy.wrap($data).should('contain','Cost Details');
@@ -83,7 +83,7 @@ selectMaker(maker){
         // Date section
         cy.get(".o_datepicker_input.o_input").clear().type(date);
     })
- }
+ }*/
  costDetails_Vehicle(vehicle){
     cy.get(".o_form_sheet>.o_group").within(($data)=>{
         // checking whether we in Cost Details
@@ -116,7 +116,7 @@ selectMaker(maker){
             cy.wait(1000);
             //cy.get(".ui-autocomplete.ui-front.ui-menu.ui-widget.ui-widget-content:nth-of-type(2)")
             cy.xpath("//ul[@class='ui-autocomplete ui-front ui-menu ui-widget ui-widget-content'][2]")
-                .contains(type).click({force:true});
+                .contains(type,{matchCase:false}).click({force:true});
         })
     })
  }
@@ -166,7 +166,10 @@ selectMaker(maker){
         cy.wrap($data).should('contain',"Date");
     })
 }
-
+notificationMessage(text){
+    cy.get(".o_notification_title>span").should('eq','The following fields are invalid:');
+    cy.get("o_notification_content").should('contain',text);
+}
 
 
 
