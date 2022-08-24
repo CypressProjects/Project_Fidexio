@@ -32,10 +32,11 @@ describe('As a POSMANAGER, I should be able to enter a new Fuel Log for the vehi
 
             cy.log("User saves the datas successfully");
             fuel.controlBtn("Save");
-            fuel.getSelectedVehicleName();
+            fuel.setSelectedVehicleName();
             cy.wait(3000);
             
-            //fuel.isBtnClicked("Save");
+            cy.log(cy.get('@selectedVehicleName'))
+            fuel.isBtnClicked("Save", cy.get('@selectedVehicleName'));
             
             
             cy.log("User deletes created Vehicle Fuel Log");

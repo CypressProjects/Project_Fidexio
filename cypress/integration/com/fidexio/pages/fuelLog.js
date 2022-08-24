@@ -3,7 +3,6 @@
 import basePage from "./basePage";
 
 class fuelLog extends basePage{
-    selectedVehicleName;
     selectVehicle(vehicle){
         cy.get("div[name='vehicle_id']>div>input").click({force:true});
         //cy.wait(3000);
@@ -17,11 +16,12 @@ class fuelLog extends basePage{
         })
     }
 
-    getSelectedVehicleName(){
-        return new Cypress.Promise((resolve)=>{
+    setSelectedVehicleName(){
             // return selected vehicle Name
-            resolve(cy.get("td:nth-of-type(2)>a[name='vehicle_id']").invoke('text'));
-        })
+            cy.get("td:nth-of-type(2)>a[name='vehicle_id']").then(($data)=>{
+                cy.log($data.text());
+                cy.wrap($data.text()).as("selectedVehicleName");
+            })
     }
 }
 export default fuelLog;
