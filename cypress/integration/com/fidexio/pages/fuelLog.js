@@ -16,12 +16,34 @@ class fuelLog extends basePage{
         })
     }
 
-    setSelectedVehicleName(){
-            // return selected vehicle Name
-            cy.get("td:nth-of-type(2)>a[name='vehicle_id']").then(($data)=>{
-                cy.log($data.text());
-                cy.wrap($data.text()).as("selectedVehicleName");
+    verifySelectedVehicleName(){
+            // verify selected vehicle Name
+            cy.get("td:nth-of-type(2)>a[name='vehicle_id']").invoke('text').then((data)=>{
+                cy.log(data);
+                //cy.wrap(data).as("selectedVehicleName");
+                this.isBtnClicked('Save', data);
             })
     }
+    promiseTest(){
+        return new Cypress.Promise(resolve => {
+            cy.get("td:nth-of-type(2)>a[name='vehicle_id']").invoke('text').then((data)=>{
+                resolve(data);
+            })
+        });
+    }
+
+
+
+
 }
 export default fuelLog;
+
+
+/**
+ * methodName(): Promise<number> {
+    return new Promise(resolve => {
+          assert.isNumber(resolve(parsedCurrentWeek), 'is number');
+        });
+    });
+  }
+ */

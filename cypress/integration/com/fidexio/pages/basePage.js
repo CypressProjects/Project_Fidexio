@@ -3,6 +3,9 @@
 class basePage {
 
     controlBtn(buttonName){
+        // cy.intercept('https://qa.fidexio.com/web/dataset/call_kw/fleet.vehicle.cost/read_group')
+            // .as('forCreateBtn');
+        //cy.wait('@forCreateBtn');
         cy.wait(3000);
         cy.get(".o_cp_buttons").within(()=>{
             cy.contains(buttonName).click({force:true});

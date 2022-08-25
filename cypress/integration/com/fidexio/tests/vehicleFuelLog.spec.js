@@ -1,9 +1,7 @@
 /// <reference types='cypress' />
 
 import loginPage from '../pages/loginPage';
-import fleetPage from '../pages/fleetPage';
 import fuelLog from '../pages/fuelLog';
-import basePage from '../pages/basePage';
 
 const login = new loginPage();
 const fuel = new fuelLog();
@@ -18,7 +16,7 @@ before('Login web page',()=>{
 })
 
 describe('As a POSMANAGER, I should be able to enter a new Fuel Log for the vehicle',()=>{
-        it('User create new Vehicle Fuel Log',()=>{
+        it('User create new Vehicle Fuel Log',/*async*/()=>{
             cy.log("User hits the Vehicles Fuel Logs");
             fuel.leftSideMenuSelection('Vehicles Fuel Logs');
 
@@ -28,15 +26,15 @@ describe('As a POSMANAGER, I should be able to enter a new Fuel Log for the vehi
 
             cy.log("User enters vehicle informations");
             fuel.selectVehicle(4);
-            cy.wait(3000);
+            cy.wait(2000);
 
             cy.log("User saves the datas successfully");
             fuel.controlBtn("Save");
-            fuel.setSelectedVehicleName();
-            cy.wait(3000);
+            cy.wait(1000);
             
-            cy.log(cy.get('@selectedVehicleName'))
-            fuel.isBtnClicked("Save", cy.get('@selectedVehicleName'));
+            fuel.verifySelectedVehicleName();
+            
+            //fuel.isBtnClicked('Save', await fuel.promiseTes())
             
             
             cy.log("User deletes created Vehicle Fuel Log");
