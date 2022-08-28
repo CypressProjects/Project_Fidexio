@@ -89,13 +89,6 @@ class surveyPage{
                     cy.get("div:nth-child(1)>a").eq(index).scrollIntoView().click({force:true});
                     cy.wait(500);
                     cy.get("a[data-type='delete']").eq(index).click({force: true});
-
-                    // into iFrame
-                    //cy.get(".aut-iframe").then(($iframe)=>{
-                    //    const iframeContent = $iframe.contents().find('body');
-                    //    cy.wrap(iframeContent).get('.btn-primary > span').click();
-                    //})
-                    //cy.get('.modal-footer > .btn-primary').wait(3000).click().wait(3000);
                 }
             })
         })
