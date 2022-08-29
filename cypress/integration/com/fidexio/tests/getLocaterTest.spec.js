@@ -2,8 +2,7 @@
 
 import constantLocators from "../ConstantLocators/demoLocators";
 
-const locaters = new constantLocators();
-
+const locaters = require('../ConstantLocators/demoLocators2.json')
 describe('',()=>{
     it('',()=>{
         cy.visit('https://fineuploader.com/');
