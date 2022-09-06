@@ -1,15 +1,13 @@
 /// <reference types='Cypress' />
 
-import { Utility } from "../../../../support/utility"
 
 describe('Env Test Suite',()=>{
     it('Env Test',()=>{
-        const environment = new Utility().getEnv();
-        console.log(environment)
-        cy.visit(environment.url)
+        const version = Cypress.env('version');
 
-        cy.get('#login').type(Cypress.env('username'))
-        //cy.get('#password').type(Cypress.env('password'))
-        //cy.get('.btn').click();
+        cy.visit(Cypress.env(version).url)
+        cy.get('#login').type(Cypress.env(version).username)
+        cy.get('#password').type(Cypress.env(version).password)
+        cy.get('.btn').click();
     })
 })
