@@ -4,8 +4,5 @@
   "reporter": "cypress-mochawesome-reporter",
   "chromeWebSecurity":false,
   "viewportWidth": 1500,
-  "viewportHeight": 1000,
-  "env":{
-    "url":"https://google.com"
-  }
+  "viewportHeight": 1000
 }

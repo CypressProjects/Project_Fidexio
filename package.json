@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "testSkip": "npx cypress run --browser chrome --report mochareports --record --key 6347d324-dc2d-444d-afdb-82f23b98ace4 --spec 'cypress\\integration\\com\\fidexio\\tests\\fidexio.spec.js'",
-    "test": "npx cypress run --browser chrome --record --key 6347d324-dc2d-444d-afdb-82f23b98ace4 --spec 'cypress\\integration\\com\\fidexio\\tests\\fidexio.spec.js'"
+    "test": "npx cypress run --browser chrome --record --key 6347d324-dc2d-444d-afdb-82f23b98ace4 --spec 'cypress\\integration\\com\\fidexio\\tests\\fidexio.spec.js'",
+    "envDemo":"npx cypress run --headless --env ENV='env1'  --spec cypress\\integration\\com\\fidexio\\tests\\EnvDemo.spec.js"
   },
   "repository": {
     "type": "git",
