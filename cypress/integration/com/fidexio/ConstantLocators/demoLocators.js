@@ -1,5 +1,6 @@
 /// <reference types='Cypress' />
 
+// const BASIC_SETUP = "";
 class constantLocators{
     HOMEPAGE = {
         DEMOS : "div#menu li:nth-child(2) > a",
