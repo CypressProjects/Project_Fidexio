@@ -3,11 +3,11 @@
 
 describe('Env Test Suite',()=>{
     it('Env Test',()=>{
-        const version = Cypress.env('version');
+        const selectedEnv = Cypress.env('selectedEnv');
 
-        cy.visit(Cypress.env(version).url)
-        cy.get('#login').type(Cypress.env(version).username)
-        cy.get('#password').type(Cypress.env(version).password)
+        cy.visit(Cypress.env(selectedEnv).url)
+        cy.get('#login').type(Cypress.env(selectedEnv).username)
+        cy.get('#password').type(Cypress.env(selectedEnv).password)
         cy.get('.btn').click();
     })
 })
