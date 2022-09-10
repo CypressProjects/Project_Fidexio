@@ -1,8 +1,9 @@
 /// <reference types='Cypress' />
 
-const specTitle = require("cypress-sonarqube-reporter/specTitle");
+//const specTitle = require("cypress-sonarqube-reporter/specTitle");
 
-describe(specTitle('Sonarqube Demo Suit'),()=>{
+//describe(specTitle('Sonarqube Demo Suit'),()=>{
+    describe('Demo Environment Suit',()=>{
     it('Env Test',()=>{
         const selectedEnv = Cypress.env('selectedEnv');
 
