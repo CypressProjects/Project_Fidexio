@@ -1,7 +1,7 @@
 /// <reference types='Cypress' />
 
 // const BASIC_SETUP = "";
-class constantLocators{
+export class constantLocators{
     HOMEPAGE = {
         DEMOS : "div#menu li:nth-child(2) > a",
         DEMOS_SIDE_MENU : {
@@ -14,4 +14,3 @@ class constantLocators{
     }
 
 }
-export default constantLocators;
