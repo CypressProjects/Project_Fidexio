@@ -8,7 +8,7 @@ const login = new loginPage();
 const locaters = new employeesLocators();
 
 before('User navigates to home page',()=>{
-    const env = Cypress.env('selectedEnv');
+    const env = Cypress.env('selectedEnv'); // this will return ENV1 or ENV2
     cy.visit(Cypress.env(env).url);
     cy.get('#login').type(Cypress.env(env).username);
     cy.get('#password').type(Cypress.env(env).password);
