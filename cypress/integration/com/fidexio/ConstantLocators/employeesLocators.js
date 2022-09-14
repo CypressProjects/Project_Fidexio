@@ -16,4 +16,6 @@ export class employeesLocators{
         EDIT: ".o_form_buttons_view > .btn-primary",
         
     }
+
+    EMPLOYEELIST = ".o_view_manager_content > div > div"
 }
